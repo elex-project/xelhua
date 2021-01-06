@@ -1,0 +1,81 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'idea'
+    id 'maven-publish'
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+javadoc.options.encoding = 'UTF-8'
+javadoc.options.docEncoding = 'UTF-8'
+javadoc.options.charSet = 'UTF-8'
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+group 'com.elex-project'
+version '1.0-SNAPSHOT'
+description 'Template project for Gradle Java'
+
+repositories {
+    maven {
+        credentials {
+            username repoUser
+            password repoPassword
+        }
+        url    'https://repository.elex-project.com/repository/maven/'
+    }
+}
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+java{
+    withJavadocJar()
+    withSourcesJar()
+}
+jar {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'ELEX co.,pte.',)
+    }
+}
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+publishing {
+    repositories {
+        maven{
+            def releaseUrl = "https://repository.elex-project.com/repository/maven-releases/"
+            def snapshotUrl = "https://repository.elex-project.com/repository/maven-snapshots/"
+            url = version.endsWith('SNAPSHOT') ? snapshotUrl : releaseUrl
+
+            credentials {
+                username repoUser
+                password repoPassword
+            }
+        }
+    }
+    publications {
+        mavenJava (MavenPublication) {
+            from components.java
+            pom.withXml {
+                asNode().appendNode('description', description)
+            }
+        }
+    }
+}
+dependencies {
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.jetbrains:annotations:19.0.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.6.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+}
