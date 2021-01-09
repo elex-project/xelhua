@@ -7,9 +7,5 @@
  * All rights reserved.
  */
 
-/**
- * Project Xelhua
- *
- * @author Elex
- */
-package com.elex_project.xelhua;
+rootProject.name = "xlsx"
+
