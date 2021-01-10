@@ -20,6 +20,7 @@ description = "Base classes for manipulating Excel file format."
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 java {
