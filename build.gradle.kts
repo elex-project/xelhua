@@ -104,6 +104,10 @@ publishing {
 
     repositories {
         maven {
+            name = "mavenLocal"
+            url = uri("file://media/elex/UltraFit/maven-repo")
+        }
+        maven {
             name = "mavenGithub"
             url = uri("https://maven.pkg.github.com/elex-project/xelhua")
             credentials {
