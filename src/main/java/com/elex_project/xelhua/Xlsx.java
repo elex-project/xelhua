@@ -27,7 +27,7 @@ import java.util.Iterator;
  *
  * @author Elex
  */
-public interface ExcelBase {
+public interface Xlsx {
 
 	/**
 	 * Open a Excel file

@@ -18,9 +18,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import static com.elex_project.xelhua.ExcelBase.*;
+import static com.elex_project.xelhua.Xlsx.*;
 
-class ExcelBaseTest {
+class XlsxTest {
 	private static File outFile1;
 
 	@BeforeAll
