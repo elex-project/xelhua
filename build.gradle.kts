@@ -15,12 +15,13 @@ plugins {
 }
 
 group = "com.elex-project"
-version = "1.1.0"
-description = "Base classes for manipulating Excel file format."
+version = "1.1.1"
+description = "Helper classes for manipulating Excel file format."
 
 repositories {
-    mavenCentral()
-    mavenLocal()
+    maven {
+        url = uri("https://repository.elex-project.com/repository/maven")
+    }
 }
 
 java {
@@ -103,6 +104,16 @@ publishing {
     }
 
     repositories {
+        maven {
+            name = "mavenElex"
+            val urlRelease = uri("https://repository.elex-project.com/repository/maven-releases")
+            val urlSnapshot = uri("https://repository.elex-project.com/repository/maven-snapshots")
+            url = if (version.toString().endsWith("SNAPSHOT")) urlSnapshot else urlRelease
+            credentials {
+                username = project.findProperty("repo.username") as String
+                password = project.findProperty("repo.password") as String
+            }
+        }
         maven {
             name = "mavenGithub"
             url = uri("https://maven.pkg.github.com/elex-project/xelhua")
