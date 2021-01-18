@@ -1,12 +1,3 @@
-/*
- * Apache License
- * Version 2.0, January 2004
- * http://www.apache.org/licenses/
- *
- * Copyright (c) 2021, Elex
- * All rights reserved.
- */
-
 plugins {
     java
     `java-library`
@@ -15,7 +6,7 @@ plugins {
 }
 
 group = "com.elex-project"
-version = "1.1.1"
+version = "1.1.2"
 description = "Helper classes for manipulating Excel file format."
 
 repositories {
@@ -78,7 +69,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
             pom {
-                name.set(project.name)
+                name.set("XLSX")
                 description.set(project.description)
                 url.set("https://github.com/elex-project/xelhua")
                 licenses {
